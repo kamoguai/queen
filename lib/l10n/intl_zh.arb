@@ -1,0 +1,27 @@
+{
+    "@@locale": "zh",
+    "loginAccountHint": "請輸入手機號",
+    "loginPasswordHint": "請輸入密碼",
+    "loginRegist": "立即註冊",
+    "loginForgot": "忘記密碼",
+    "loginBtn": "登入",
+    "searchCountry":"搜尋國家",
+    "enterVerifyCode":"請輸入驗證碼",
+    "getVerifyCode":"獲取驗證碼",
+    "enterPassword":"請填寫密碼",
+    "confirmPassword":"請確認密碼",
+    "forgotPasswordSubmitBtn":"立即找回",
+    "registSubmitBtn":"註冊並登錄",
+    "registTitle":"註冊",
+    "countryArea":"國家/地區",
+    "nationalityTitle":"國籍",
+    "hint":"提示",
+    "exitApp":"離開此app?",
+    "yesText":"是",
+    "noText":"否",
+    "homePageNewsPush":"消息推廣",
+    "homePageNews":"最新消息",
+    "userFindPwdOk":"密碼重置成功"
+
+
+}

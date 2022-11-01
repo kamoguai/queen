@@ -1,0 +1,27 @@
+{
+    
+    "@@locale": "en",
+    "loginAccountHint": "please enter mobile number",
+    "loginPasswordHint": "please enter password",
+    "loginRegist": "Sign up now",
+    "loginForgot": "Forgot password",
+    "loginBtn": "Login",
+    "searchCountry":"search country",
+    "enterVerifyCode":"verification code",
+    "getVerifyCode":"get verification code",
+    "enterPassword":"please enter password",
+    "confirmPassword":"please confirm password",
+    "forgotPasswordSubmitBtn":"get it back",
+    "registSubmitBtn":"Register and log in",
+    "registTitle":"Registered",
+    "countryArea":"Country/Region",
+    "nationalityTitle":"Country",
+    "hint":"Hint",
+    "exitApp":"Exti this app?",
+    "yesText":"Yes",
+    "noText":"No",
+    "homePageNewsPush":"News promotion",
+    "homePageNews":"New message",
+    "userFindPwdOk":"Password reset success"
+
+}

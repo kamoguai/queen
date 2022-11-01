@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "markerRoads_Tie_BankerPair road(9).png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "markerRoads_Tie_BankerPair road(9)@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "markerRoads_Tie_BankerPair road(9)@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
