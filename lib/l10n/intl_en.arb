@@ -22,6 +22,15 @@
     "noText":"No",
     "homePageNewsPush":"News promotion",
     "homePageNews":"New message",
-    "userFindPwdOk":"Password reset success"
+    "userFindPwdOk":"Password reset success",
+    "personProfile":"Personal information",
+    "homeVodMatch":"Match",
+    "homeVodLive": "Live",
+    "homeLiveStream":"Live",
+    "homeLiveExpected":"Expected",
+    "liveSysRecommend":"system recommend",
+    "livePopular":"popular",
+    "liveAttentionAnchor":"anchor",
+    "liveCustom":"customize"
 
 }

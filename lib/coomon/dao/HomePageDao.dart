@@ -7,7 +7,7 @@ import 'package:queen/coomon/net/Api.dart';
 
 class HomePageDao {
   ///取的live列表
-  static productList({required Map<String, dynamic> params}) async {
+  static getLiveList({required Map<String, dynamic> params}) async {
     Map<String, dynamic> mainDataArray = {};
     List<dynamic> dataList = [];
     Map<String, dynamic> header = {
@@ -18,7 +18,29 @@ class HomePageDao {
         Address.getLiveList(), params, header, Options(method: "post"));
     if (res != null && res.result) {
       if (Config.debug) {
-        debugPrint("productList resp =>  ${res.data}");
+        debugPrint("getLiveList resp =>  ${res.data}");
+      }
+      if (res.data["ret"] == 200) {
+        mainDataArray = res.data["data"];
+
+        return DataResult(mainDataArray, true);
+      }
+    }
+  }
+
+  ///取的live預定列表
+  static getScheduleLive({required Map<String, dynamic> params}) async {
+    Map<String, dynamic> mainDataArray = {};
+    List<dynamic> dataList = [];
+    Map<String, dynamic> header = {
+      'Accept': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    var res = await HttpManager.netFetch(
+        Address.getScheduleLive(), params, header, Options(method: "post"));
+    if (res != null && res.result) {
+      if (Config.debug) {
+        debugPrint("getScheduleLive resp =>  ${res.data}");
       }
       if (res.data["ret"] == 200) {
         mainDataArray = res.data["data"];
@@ -41,6 +63,75 @@ class HomePageDao {
     if (res != null && res.result) {
       if (Config.debug) {
         debugPrint("newsList resp =>  ${res.data}");
+      }
+
+      if (res.data["ret"] == 200) {
+        mainDataArray = res.data["data"];
+
+        return DataResult(mainDataArray, true);
+      }
+    }
+  }
+
+  ///取得live直播url
+  static getLiveVideoURL({required Map<String, dynamic> params}) async {
+    Map<String, dynamic> mainDataArray = {};
+    List<dynamic> dataList = [];
+    Map<String, dynamic> header = {
+      'Accept': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    var res = await HttpManager.netFetch(
+        Address.getLiveVideoURL(), params, header, Options(method: "post"));
+    if (res != null && res.result) {
+      if (Config.debug) {
+        debugPrint("getLiveVideoURL resp =>  ${res.data}");
+      }
+
+      if (res.data["ret"] == 200) {
+        mainDataArray = res.data["data"];
+
+        return DataResult(mainDataArray, true);
+      }
+    }
+  }
+
+  ///取得首頁vod
+  static getHomeVideo({required Map<String, dynamic> params}) async {
+    Map<String, dynamic> mainDataArray = {};
+    List<dynamic> dataList = [];
+    Map<String, dynamic> header = {
+      'Accept': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    var res = await HttpManager.netFetch(
+        Address.getHomeVideo(), params, header, Options(method: "post"));
+    if (res != null && res.result) {
+      if (Config.debug) {
+        debugPrint("getHomeVideo resp =>  ${res.data}");
+      }
+
+      if (res.data["ret"] == 200) {
+        mainDataArray = res.data["data"];
+
+        return DataResult(mainDataArray, true);
+      }
+    }
+  }
+
+  ///取得vod list
+  static getVideoList({required Map<String, dynamic> params}) async {
+    Map<String, dynamic> mainDataArray = {};
+    List<dynamic> dataList = [];
+    Map<String, dynamic> header = {
+      'Accept': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    var res = await HttpManager.netFetch(
+        Address.getVideoList(), params, header, Options(method: "post"));
+    if (res != null && res.result) {
+      if (Config.debug) {
+        debugPrint("getVideoList resp =>  ${res.data}");
       }
 
       if (res.data["ret"] == 200) {

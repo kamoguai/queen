@@ -10,6 +10,11 @@ class Address {
     return "${baseUrlNewPublic}GetLiveList";
   }
 
+  ///取得live預定列表
+  static String getScheduleLive() {
+    return "${baseUrlNewPublic}GetScheduleLive";
+  }
+
   ///取得live新聞
   static String getLiveNews() {
     return "${baseUrlNewPublic}GetLiveNews";
@@ -53,5 +58,40 @@ class Address {
   ///取回使用者密碼
   static String getUserFindPass() {
     return "$baseUrl$apiPublic?service=Login.userFindPass";
+  }
+
+  ///直播地址
+  static String getLiveVideoURL() {
+    return "${baseUrlNewPublic}GetLiveVideoURL";
+  }
+
+  ///取得homeVod
+  static String getHomeVideo() {
+    return "$baseUrlPublic?service=Video.getHomeVideo";
+  }
+
+  ///取得vod列表
+  static String getVideoList() {
+    return "$baseUrlPublic?service=Video.getVideoList";
+  }
+
+  ///主播開播
+  static String createRoom() {
+    return "$baseUrlPublic?service=Live.createRoom";
+  }
+
+  ///結束直播
+  static String stopRoom() {
+    return "$baseUrlPublic?service=Live.stopRoom";
+  }
+
+  ///結束直播資訊
+  static String getLiveEndInfo() {
+    return "$baseUrlPublic?service=Live.stopInfo";
+  }
+
+  ///取得用戶資料
+  static String getAnchor() {
+    return "$baseUrlPublic?service=Anchor.getAnchorInfo";
   }
 }

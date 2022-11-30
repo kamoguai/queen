@@ -1,4 +1,6 @@
 PODS:
+  - auto_orientation (0.0.1):
+    - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
@@ -14,13 +16,26 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - image_cropper (0.0.4):
+    - Flutter
+    - TOCropViewController (~> 2.6.1)
+  - image_picker_ios (0.0.1):
+    - Flutter
   - live_flutter_plugin (1.0.0):
     - Flutter
     - TXCustomBeautyProcesserPlugin
     - TXLiteAVSDK_Professional (= 10.7.11919)
   - path_provider_ios (0.0.1):
     - Flutter
+  - permission_handler_apple (9.0.4):
+    - Flutter
+  - purchases_flutter (4.4.2):
+    - Flutter
+    - PurchasesHybridCommon (= 4.4.3)
+  - PurchasesHybridCommon (4.4.3):
+    - RevenueCat (= 4.14.2)
   - ReachabilitySwift (5.0.0)
+  - RevenueCat (4.14.2)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_ios (0.0.1):
@@ -28,7 +43,15 @@ PODS:
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
+  - super_player (1.0.3):
+    - Flutter
+    - TXLiteAVSDK_Professional
+  - tencent_effect_flutter (0.0.1):
+    - Flutter
+    - TXCustomBeautyProcesserPlugin (= 1.0.2)
+    - XMagic
   - Toast (4.0.0)
+  - TOCropViewController (2.6.1)
   - TXCustomBeautyProcesserPlugin (1.0.2)
   - TXLiteAVSDK_Professional (10.7.11919):
     - TXLiteAVSDK_Professional/Professional (= 10.7.11919)
@@ -38,31 +61,46 @@ PODS:
   - WebRTC-SDK (104.5112.02)
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
+  - XMagic (2.5.0.250)
 
 DEPENDENCIES:
+  - auto_orientation (from `.symlinks/plugins/auto_orientation/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_webrtc (from `.symlinks/plugins/flutter_webrtc/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - live_flutter_plugin (from `.symlinks/plugins/live_flutter_plugin/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - purchases_flutter (from `.symlinks/plugins/purchases_flutter/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - super_player (from `.symlinks/plugins/super_player/ios`)
+  - tencent_effect_flutter (from `.symlinks/plugins/tencent_effect_flutter/ios`)
+  - TXLiteAVSDK_Professional
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
     - FMDB
+    - PurchasesHybridCommon
     - ReachabilitySwift
+    - RevenueCat
     - Toast
+    - TOCropViewController
     - TXCustomBeautyProcesserPlugin
     - TXLiteAVSDK_Professional
     - WebRTC-SDK
+    - XMagic
 
 EXTERNAL SOURCES:
+  auto_orientation:
+    :path: ".symlinks/plugins/auto_orientation/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
   device_info_plus:
@@ -73,41 +111,64 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_webrtc/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  image_cropper:
+    :path: ".symlinks/plugins/image_cropper/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   live_flutter_plugin:
     :path: ".symlinks/plugins/live_flutter_plugin/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  purchases_flutter:
+    :path: ".symlinks/plugins/purchases_flutter/ios"
   share_plus:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
+  super_player:
+    :path: ".symlinks/plugins/super_player/ios"
+  tencent_effect_flutter:
+    :path: ".symlinks/plugins/tencent_effect_flutter/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  auto_orientation: 2941c44ebe5c3d41016001597ab03e81a92a26ce
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_webrtc: aa130dfe1eca6625c2e2e51ce830abb495bdb06e
   fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  image_cropper: 60c2789d1f1a78c873235d4319ca0c34a69f2d98
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   live_flutter_plugin: 52968f5b43218bc6828bb6ec913f7cb8e44cde20
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  purchases_flutter: aa4a4dead99e473ba5e91776327f0d9863b6ffd5
+  PurchasesHybridCommon: b282401dd8d2c925ee018e7000d278e946a6422e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  RevenueCat: 1e469add8ba7163ef030b41179dff6a8b73c1568
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  super_player: c3a021d858aac647df2682a6e524e11167f27cef
+  tencent_effect_flutter: b5b32e9b397f248a28b15f079d7e16ce0bdcff00
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   TXCustomBeautyProcesserPlugin: 099393b941cb40eda12b3a80bf6c0319957b1cfd
   TXLiteAVSDK_Professional: c9561c7b5e6f3d075d4bb4bafd81bf79470db12e
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
   WebRTC-SDK: e0589abeb63db07a4ca1f45c82ba0f1a72e61622
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
+  XMagic: 8150a6fb1a0743a582e39eea60ad75c007dbe3b3
 
-PODFILE CHECKSUM: fc373913da269cb4bcef7092011f51e22c61d86a
+PODFILE CHECKSUM: 5ed5eb53894f5efd152ffee254674f5931654ad3
 
 COCOAPODS: 1.11.3

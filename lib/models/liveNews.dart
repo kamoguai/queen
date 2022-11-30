@@ -6,19 +6,19 @@ part 'liveNews.g.dart';
 @JsonSerializable(explicitToJson: true)
 class LiveNews {
   @JsonKey(name: 'newsuid')
-  String newsuid;
+  String? newsuid;
   @JsonKey(name: 'time')
-  String time;
+  String? time;
   @JsonKey(name: 'title')
-  String title;
+  String? title;
   @JsonKey(name: 'newsContent')
-  String newsContent;
+  String? newsContent;
 
   LiveNews({
-    required this.newsuid,
-    required this.time,
-    required this.title,
-    required this.newsContent,
+    this.newsuid,
+    this.time,
+    this.title,
+    this.newsContent,
   });
   factory LiveNews.fromJson(Map<String, dynamic> map) =>
       _$LiveNewsFromJson(map);

@@ -21,7 +21,16 @@
     "noText":"否",
     "homePageNewsPush":"消息推廣",
     "homePageNews":"最新消息",
-    "userFindPwdOk":"密碼重置成功"
+    "userFindPwdOk":"密碼重置成功",
+    "personProfile":"個人資料",
+    "homeVodMatch":"球賽",
+    "homeVodLive": "生活",
+    "homeLiveStream":"直播",
+    "homeLiveExpected":"預計",
+    "liveSysRecommend":"系統推薦",
+    "livePopular":"熱門",
+    "liveAttentionAnchor":"關注主播",
+    "liveCustom":"自訂"
 
 
 }

@@ -101,7 +101,7 @@ class _ForgotPwdPageState extends State<ForgotPwdPage> with BaseWidget {
                 obscureText: false,
                 keybordType: TextInputType.number,
                 regEx: '',
-                initialCountryCode: 'VN',
+                initialCountryCode: '886',
                 suffixIcon: () {
                   if (accountCtrl.text.isNotEmpty) {
                     return IconButton(

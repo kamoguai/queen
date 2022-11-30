@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:queen/coomon/dao/HomePageDao.dart';
+import 'package:queen/coomon/dao/LiveDao.dart';
 import 'package:queen/coomon/dao/UserInfoDao.dart';
 import 'package:queen/coomon/style/MyStyle.dart';
+import 'package:queen/coomon/utils/NavigatorUtils.dart';
 import 'package:queen/models/liveList.dart';
 import 'package:queen/models/liveNews.dart';
 import 'package:queen/models/userInfo.dart';
+import 'package:queen/pages/LivePlay/LiveAudiencePage.dart';
 import 'package:queen/widgets/BaseWidget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:queen/widgets/code4carousel.dart';
+import 'package:queen/widgets/liveVodWidget.dart';
 
 ///
 ///
@@ -151,7 +155,7 @@ class _HomePageState extends State<HomePage> with BaseWidget {
                 SizedBox(
                   height: _deviceHeight * 0.03,
                 ),
-                lnModelList.isNotEmpty
+                llModelList.isEmpty
                     ? Container()
                     : GridView.count(
                         shrinkWrap: true,
@@ -204,44 +208,24 @@ class _HomePageState extends State<HomePage> with BaseWidget {
   Widget _vedioWidget(LiveList model) {
     Widget w;
     w = GestureDetector(
-      child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                  fit: BoxFit.fill, image: NetworkImage(model.thumbURL))),
-          child: Stack(children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              child:
-                  Image.asset('assets/images/HomePage/livecorner/LIVE套件.png'),
-            ),
-            Positioned(
-                bottom: 0,
-                child: Container(
-                  width: _deviceWidth * 0.43,
-                  height: _deviceHeight * 0.03,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.6),
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      model.moduleTitle,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ))
-          ]),
-        ),
+      child: LiveWidget(
+        model: model,
       ),
-      onTap: () {
+      onTap: () async {
         debugPrint(model.matchID);
+        String callback = await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LiveAudiencePage(
+                      streamerUID: model.streamerUID,
+                      matchID: model.matchID,
+                      channel: model.channel,
+                    )));
+
+        if (callback == "callback") {
+          _callApiGetProdList();
+          _callApiNewsList();
+        }
       },
     );
 
@@ -263,9 +247,9 @@ class _HomePageState extends State<HomePage> with BaseWidget {
 
   Widget _titleItem(LiveNews model) {
     Widget w = ListTile(
-      title: Text(model.time),
+      title: Text(model.time!),
       trailing: Text(
-        model.title,
+        model.title!,
         overflow: TextOverflow.ellipsis,
       ),
       onTap: () {
@@ -293,7 +277,7 @@ class _HomePageState extends State<HomePage> with BaseWidget {
     Map<String, dynamic> params = {};
     params["uid"] = userInfo.id;
     params["token"] = userInfo.token;
-    var res = await HomePageDao.productList(params: params);
+    var res = await HomePageDao.getLiveList(params: params);
     if (res != null) {
       Map<String, dynamic> resMap = res.data;
       if (resMap["code"] == 0) {
@@ -331,6 +315,28 @@ class _HomePageState extends State<HomePage> with BaseWidget {
     }
   }
 
+  ///取得live user info
+  _callApiAnchor() async {
+    Map<String, dynamic> params = {};
+    params["uid"] = userInfo.id;
+    params["token"] = userInfo.token;
+    params["liveuid"] = userInfo.id;
+    var res = await LiveDao.getAnchor(params: params);
+    if (res != null) {
+      Map<String, dynamic> resMap = res.data;
+      if (resMap["code"] == 0) {
+        List<dynamic> newsList = resMap["info"];
+        setState(() {
+          for (var dic in newsList) {
+            lnModel = LiveNews.fromJson(dic);
+
+            lnModelList.add(lnModel);
+          }
+        });
+      }
+    }
+  }
+
   _initData() async {
     var userRes = await UserInfoDao.getUserInfoLocal();
 
@@ -340,6 +346,7 @@ class _HomePageState extends State<HomePage> with BaseWidget {
           userInfo = userRes.data;
           _callApiGetProdList();
           _callApiNewsList();
+          _callApiAnchor();
         }
       }
     });

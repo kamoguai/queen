@@ -87,16 +87,21 @@ class UserInfoDao {
       }
       if (res.data['ret'] == 200) {
         Map<String, dynamic> dataMap = res.data["data"];
-        List<dynamic> infos = dataMap["info"];
-        if (infos.isNotEmpty) {
-          UserInfo userInfo = UserInfo.fromJson(infos[0]);
-          await LocalStorage.save(Config.userPwd, params["user_pass"]);
-          await LocalStorage.save(Config.userMobile, params["user_login"]);
-          await LocalStorage.save(
-              Config.userInfo, json.encode(userInfo.toJson()));
-          mainDataArray = infos[0];
+        if (dataMap['code'] == 0) {
+          List<dynamic> infos = dataMap["info"];
+          if (infos.isNotEmpty) {
+            UserInfo userInfo = UserInfo.fromJson(infos[0]);
+            await LocalStorage.save(Config.userPwd, params["user_pass"]);
+            await LocalStorage.save(
+                Config.userInfo, json.encode(userInfo.toJson()));
+            mainDataArray = infos[0];
+            return DataResult(mainDataArray, true);
+          }
+        } else {
+          mainDataArray = dataMap;
           return DataResult(mainDataArray, true);
         }
+
         return DataResult(mainDataArray, false);
       }
     }

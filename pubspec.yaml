@@ -43,7 +43,7 @@ dependencies:
   flutter_svg: ^1.1.5 #svg
   intl_phone_field: ^3.1.0 #國際電話區碼
   flutter_localized_locales: ^2.0.3 #多語言
-  socket_io_client: ^2.0.0 #socket io聊天室
+  socket_io_client: ^1.0.2 #socket io聊天室 server 用socket io 2版，所以flutter也必須為2版
   flutter_webrtc: ^0.9.11 #通訊
   live_flutter_plugin: ^1.0.16 #騰訊直播
   flutter_styled_toast: ^2.0.0
@@ -51,6 +51,25 @@ dependencies:
   crypto: ^3.0.2 #加解密
   hive: ^2.2.3 #數據持久化
   hive_flutter: ^1.1.0 #hive擴充
+  auto_orientation: ^2.2.1
+  animations: ^2.0.7
+  permission_handler: ^10.2.0 #系統權限管理
+  flutter_easyloading: ^3.0.5 #簡單loading畫面
+  image_picker: ^0.8.6 #圖片選擇器
+  image_cropper: ^3.0.1 # 剪裁圖片
+  purchases_flutter: ^4.4.2 # app內購
+  ##騰訊播放器
+  super_player:
+    git:
+      url: https://github.com/LiteAVSDK/Player_Flutter
+      path: Flutter
+      ref: Professional
+  # superplayer_widget:
+  #   # 该路径根据superplayer_widget存放路径改变
+  #   path: superplayer_widget
+  ##騰訊特效
+  tencent_effect_flutter:
+    path: ../TEFSDK
 
 dev_dependencies:
   json_serializable: ^6.2.0 #json模板
@@ -63,6 +82,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/labels/i18n.json
+    - assets/images/icon/
     - assets/images/
     - assets/images/Application/
     - assets/images/Login/
@@ -81,6 +102,12 @@ flutter:
     - assets/images/HomePage/livecorner/
     - assets/images/HomePage/home_message/
     - assets/images/girls/
+    - assets/images/game/bacca/allcards/
+    - assets/images/1V1/
+    - assets/images/HomePage/
+    - assets/images/首页热门/
+    - assets/images/开始观看直播/开播预览图片/
+    - assets/images/MyProfile/
   
 
   generate: true

@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:queen/models/userInfo.dart';
+import 'package:queen/models/videoList.dart';
 import 'package:queen/pages/HomeNavigationBarPage.dart';
+import 'package:queen/pages/LivePlay/LiveAudiencePage.dart';
 import 'package:queen/pages/SocketClientPage.dart';
 import 'package:queen/pages/homePage/HomePage.dart';
 import 'package:queen/pages/live_start_push.dart';
 import 'package:queen/pages/loginPage/ForgotPwdPage.dart';
 import 'package:queen/pages/loginPage/LoginPage.dart';
 import 'package:queen/pages/loginPage/RegistPage.dart';
+import 'package:queen/pages/profilePage/settingPage.dart';
+import 'package:queen/pages/purchasePage/appPurchasePage.dart';
+import 'package:queen/pages/push/live_camera_push_finished.dart';
+import 'package:queen/pages/videoPage/recordVideoPage.dart';
+import 'package:queen/pages/videoPage/videoPlayPage.dart';
+import 'package:queen/pages/videoPage/videoScrollPage.dart';
 
 ///
 ///導航欄
-///Date: 2022-05-27
+///
 ///
 class NavigatorUtils {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -87,5 +96,73 @@ class NavigatorUtils {
   ///登入後首頁
   static goHomeNavigationBarPage(BuildContext context) {
     pushReplacementNamed(HomeNavigationBarPage.sName);
+  }
+
+  ///首頁直播頁面
+  static goLiveAudiencePage(BuildContext context,
+      {String? streamerUID, String? matchID, String? channel}) {
+    navigatorRouter(
+        context,
+        LiveAudiencePage(
+          streamerUID: streamerUID,
+          matchID: matchID,
+          channel: channel,
+        ));
+  }
+
+  ///播放器頁面
+  static goVideoPlayPage(BuildContext context,
+      {required VideoList videoListModel}) {
+    navigatorRouter(context, VideoPlayPage(videoListModel: videoListModel));
+  }
+
+  ///播放器scroll頁面
+  static goVideoScrollPage(BuildContext context,
+      {required List<VideoList> videoListModelList,
+      required VideoList videoListModel}) {
+    navigatorRouter(
+        context,
+        VedioScrollPage(
+          videoListModeList: videoListModelList,
+          videoListMode: videoListModel,
+        ));
+  }
+
+  ///短視頻錄影頁面
+  static goRecordVideoPage(
+    BuildContext context,
+  ) {
+    navigatorRouter(context, RecordVideoPage());
+  }
+
+  ///設置頁面
+  static goSettingPage(BuildContext context) {
+    navigatorRouter(context, SettingPage());
+  }
+
+  ///直播結束後頁面
+  static goLiveCameraPushFinishedPage(BuildContext context,
+      {required UserInfo userInfo,
+      DateTime? pushTimer,
+      String? getCoin,
+      String? views,
+      String? stream,
+      String? uid,
+      String? token}) {
+    navigatorRouter(
+        context,
+        LiveCameraPushFinishedPage(
+          userinfo: userInfo,
+          pushTimer: pushTimer,
+          getCoin: getCoin,
+          views: views,
+          stream: stream,
+          uid: uid,
+          token: token,
+        ));
+  }
+
+  static goAppPurchasePage(BuildContext context) {
+    navigatorRouter(context, const AppPurchasePage());
   }
 }

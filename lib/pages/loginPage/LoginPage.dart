@@ -3,6 +3,7 @@ import 'package:queen/coomon/config/Config.dart';
 import 'package:queen/coomon/dao/UserInfoDao.dart';
 import 'package:queen/coomon/local/LocalStorage.dart';
 import 'package:queen/coomon/style/MyStyle.dart';
+import 'package:queen/coomon/utils/CommonUtils.dart';
 import 'package:queen/coomon/utils/NavigatorUtils.dart';
 import 'package:queen/widgets/BaseWidget.dart';
 import 'package:queen/widgets/custom_input_fields.dart';
@@ -44,39 +45,48 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
   }
 
   Widget _buildUI() {
-    return Scaffold(
-        body: Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage("assets/images/Login/bg_login.png"),
-        ),
-      ),
-      child: SafeArea(
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
-          SizedBox(
-            height: _deviceHeight * 0.05,
-          ),
-          _logo(),
-          SizedBox(
-            height: _deviceHeight * 0.05,
-          ),
-          _loginForm(),
-          SizedBox(
-            height: _deviceHeight * 0.03,
-          ),
-          _registAndForgotpwd(),
-          SizedBox(
-            height: _deviceHeight * 0.05,
-          ),
-          _loginBtn(),
-          SizedBox(
-            height: _deviceHeight * 0.05,
-          ),
-          _lineView(),
-        ]),
-      ),
-    ));
+    return !isLoading
+        ? Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/Login/bg_login.png"),
+              ),
+            ),
+          )
+        : Scaffold(
+            body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/Login/bg_login.png"),
+              ),
+            ),
+            child: SafeArea(
+              child: Column(mainAxisSize: MainAxisSize.max, children: [
+                SizedBox(
+                  height: _deviceHeight * 0.05,
+                ),
+                _logo(),
+                SizedBox(
+                  height: _deviceHeight * 0.05,
+                ),
+                _loginForm(),
+                SizedBox(
+                  height: _deviceHeight * 0.03,
+                ),
+                _registAndForgotpwd(),
+                SizedBox(
+                  height: _deviceHeight * 0.05,
+                ),
+                _loginBtn(),
+                SizedBox(
+                  height: _deviceHeight * 0.05,
+                ),
+                _lineView(),
+              ]),
+            ),
+          ));
   }
 
   Widget _logo() {
@@ -116,9 +126,7 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
                         phoneCtrl.clear();
                       },
                     );
-                  } else {
-                    // return Container();
-                  }
+                  } else {}
                 }(),
                 validator: (val) {
                   if (_phone == null || _phone!.isEmpty) {
@@ -129,9 +137,8 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
                 },
                 onChanged: (phone) {
                   setState(() {
-                    _phone = phone.completeNumber;
-
-                    // _checkTextField();
+                    _phone = phone.number;
+                    _countryCode = phone.countryCode;
                   });
                 },
               ),
@@ -140,7 +147,6 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
                 onSaved: (value) {
                   setState(() {
                     _password = value;
-                    // _checkTextField();
                   });
                 },
                 hintText: localizations.loginPasswordHint,
@@ -154,9 +160,7 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
                         pwdCtrl.clear();
                       },
                     );
-                  } else {
-                    // return Container();
-                  }
+                  } else {}
                 }(),
                 validator: (val) {
                   if (pwdCtrl.text.isEmpty) {
@@ -268,19 +272,20 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
     String mobile = await LocalStorage.get(Config.userMobile) ?? "";
     phoneCtrl.text = mobile;
     pwdCtrl.text = await LocalStorage.get(Config.userPwd) ?? "";
+    String cc = await LocalStorage.get(Config.countryCode) ?? "";
+    _countryCode = await LocalStorage.get(Config.countryCode);
     setState(() {
-      if (mobile.isNotEmpty) {
-        _countryCode = '886';
-      } else {
-        _countryCode = 'VN';
-      }
       _phone = mobile;
+      _countryCode = cc.isEmpty ? "" : cc.replaceAll("+", "");
+      isLoading = true;
     });
   }
 
   _submitEvent() {
     print('phone -> $_phone');
     print('pwd -> ${pwdCtrl.text}');
+    print('countrycode -> $_countryCode');
+
     if (_loginFormKey.currentState!.validate()) {
       _loginFormKey.currentState!.save();
       _callApiMobileLogin();
@@ -299,13 +304,20 @@ class _LoginPageState extends State<LoginPage> with BaseWidget {
 
   _callApiMobileLogin() async {
     Map<String, dynamic> params = {};
-    String mobile = _phone!.replaceAll("+", "");
+    await LocalStorage.save(Config.countryCode, _countryCode!);
+    await LocalStorage.save(Config.userMobile, _phone!);
+    String mobile = _countryCode!.replaceAll("+", "") + _phone!;
     params["user_login"] = mobile;
     params["user_pass"] = pwdCtrl.text;
     debugPrint(params.toString());
     var res = await UserInfoDao.mobileLogin(params: params);
     if (res != null) {
-      NavigatorUtils.goHomeNavigationBarPage(context);
+      if (res.data["code"] != null && res.data["code"] != 0) {
+        CommonUtils.showToast(context, msg: res.data["msg"]);
+        return;
+      } else {
+        NavigatorUtils.goHomeNavigationBarPage(context);
+      }
     }
   }
 }
